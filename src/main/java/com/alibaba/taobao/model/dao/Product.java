@@ -1,5 +1,8 @@
 package com.alibaba.taobao.model.dao;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,11 +25,18 @@ public class Product {
     @JoinColumn(name = "product_id")
     private List<OrderItem> orderItems = new ArrayList<>();
 
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @JoinColumn(name = "product_id")
+    private List<Cart> carts = new ArrayList<>();
+
     // 商品名称
     @Column(name = "name")
     private String name;
 
-    // 产品图片，相对路径地址
+    // 产品图片路径地址
     @Column(name = "image")
     private String image;
 
@@ -47,10 +57,14 @@ public class Product {
     private int status;
 
     // 创建时间
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "create_time")
     private Date createTime;
 
     // 更新时间
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "update_time")
     private Date updateTime;
 
