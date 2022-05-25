@@ -21,7 +21,7 @@ public class Category {
     @Column(name = "type")
     private int type;
 
-    // 父id，也就是上一级目录的id，如果是一级目录，那么为根目录
+    // 父id，也就是上一级目录的id，如果是一级目录，那么父id为0
     @Column(name = "parent_id")
     private int parentId;
 

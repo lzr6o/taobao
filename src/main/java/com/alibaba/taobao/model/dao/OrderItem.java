@@ -13,8 +13,6 @@ public class OrderItem {
     @Column(name = "id")
     private int id;
 
-    @
-
     // 归属订单id
     @Column(name = "order_no")
     private String orderNo;

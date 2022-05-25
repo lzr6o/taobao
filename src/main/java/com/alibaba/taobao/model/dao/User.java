@@ -9,6 +9,7 @@ import java.util.List;
 @Table(name = "user")
 public class User {
 
+    // 用户id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -21,21 +22,27 @@ public class User {
     )
     private List<Order> orders = new ArrayList<>();
 
+    // 用户名
     @Column(name = "username")
     private String username;
 
+    // 用户密码，MD5加密
     @Column(name = "password")
     private String password;
 
-    @Column(name = "role")
-    private Long role;
-
+    // 个性签名
     @Column(name="personalized_signature")
     private String personalizedSignature;
 
+    // 角色，1-普通用户，2-管理员
+    @Column(name = "role")
+    private Long role;
+
+    // 创建时间
     @Column(name = "create_time")
     private Date createTime;
 
+    // 更新时间
     @Column(name = "update_time")
     private Date updateTime;
 

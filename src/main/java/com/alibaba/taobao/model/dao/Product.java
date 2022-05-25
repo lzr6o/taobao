@@ -1,7 +1,9 @@
 package com.alibaba.taobao.model.dao;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "product")
@@ -12,6 +14,13 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
+
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @JoinColumn(name = "product_id")
+    private List<OrderItem> orderItems = new ArrayList<>();
 
     // 商品名称
     @Column(name = "name")
@@ -45,5 +54,5 @@ public class Product {
     @Column(name = "update_time")
     private Date updateTime;
 
-    
+
 }
