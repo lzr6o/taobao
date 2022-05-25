@@ -57,5 +57,82 @@ public class User {
 
     }
 
+    public User(String username, String password, String personalizedSignature, Long role, Date createTime, Date updateTime) {
+        this.username = username;
+        this.password = password;
+        this.personalizedSignature = personalizedSignature;
+        this.role = role;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+    }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPersonalizedSignature() {
+        return personalizedSignature;
+    }
+
+    public void setPersonalizedSignature(String personalizedSignature) {
+        this.personalizedSignature = personalizedSignature;
+    }
+
+    public Long getRole() {
+        return role;
+    }
+
+    public void setRole(Long role) {
+        this.role = role;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", orders=" + orders +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", personalizedSignature='" + personalizedSignature + '\'' +
+                ", role=" + role +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
+    }
 }
