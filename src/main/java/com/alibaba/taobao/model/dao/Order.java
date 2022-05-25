@@ -13,6 +13,10 @@ public class Order {
     @Column(name = "id")
     private int id;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     // 订单号（非主键id）
     @Column(name = "order_no")
     private String orderNo;
@@ -33,7 +37,7 @@ public class Order {
     @Column(name = "receiver_address")
     private String receiverAddress;
 
-    // 订单状态：0用户已取消，10未付款（初始状态），20
+    // 订单状态：0用户已取消，10未付款（初始状态），20已付款，30已发货，40交易完成
     @Column(name = "order_status")
     private int orderStatus;
 

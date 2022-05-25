@@ -44,4 +44,6 @@ public class Product {
     // 更新时间
     @Column(name = "update_time")
     private Date updateTime;
+
+    
 }
