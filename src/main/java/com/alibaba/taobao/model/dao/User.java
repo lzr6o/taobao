@@ -12,6 +12,10 @@ public class User {
     @Column(name = "id")
     private int id;
 
+    @OneToOne
+    @JoinColumn(name = "order_id", referencedColumnName = "id")
+    private Order order;
+
     @Column(name = "username")
     private String username;
 
