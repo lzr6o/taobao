@@ -19,7 +19,6 @@ public class User {
     private int id;
 
     @OneToMany(
-            mappedBy = "order",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )

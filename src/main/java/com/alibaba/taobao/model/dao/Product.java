@@ -74,10 +74,9 @@ public class Product {
 
     }
 
-    public Product(int id, Category category, List<OrderItem> orderItems, Cart cart, String name, String image, String detail, int price, int stock, int status, Date createTime, Date updateTime) {
+    public Product(int id, Category category, Cart cart, String name, String image, String detail, int price, int stock, int status, Date createTime, Date updateTime) {
         this.id = id;
         this.category = category;
-        this.orderItems = orderItems;
         this.cart = cart;
         this.name = name;
         this.image = image;

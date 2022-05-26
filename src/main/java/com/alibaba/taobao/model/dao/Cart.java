@@ -4,7 +4,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -19,10 +18,12 @@ public class Cart {
     @Column(name = "id")
     private int id;
 
+    // 用户id
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
+    // 商品id
     @OneToMany(
             mappedBy = "cart",
             cascade = CascadeType.ALL,
