@@ -7,6 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+/**
+ * 描述：用户控制器
+ */
 @Controller
 public class UserController {
 

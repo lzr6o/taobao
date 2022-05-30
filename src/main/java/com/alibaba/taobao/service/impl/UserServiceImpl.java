@@ -6,6 +6,9 @@ import com.alibaba.taobao.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * 描述：UserService实现类
+ */
 @Service
 public class UserServiceImpl implements UserService {
 
