@@ -33,6 +33,10 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
-        int count =
+        try {
+            userRepository.save(user);
+        } catch (Exception ex) {
+            throw new AlibabaTaobaoException(AlibabaTaobaoExceptionEnum.INSERT_FAILED);
+        }
     }
 }
