@@ -1,6 +1,8 @@
 package com.alibaba.taobao.model.dao;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -9,6 +11,8 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@DynamicInsert
+@DynamicUpdate
 @Table(name = "user")
 public class User {
 
@@ -33,7 +37,7 @@ public class User {
     private String password;
 
     // 个性签名
-    @Column(name="personalized_signature")
+    @Column(name = "personalized_signature")
     private String personalizedSignature;
 
     // 角色，1-普通用户，2-管理员

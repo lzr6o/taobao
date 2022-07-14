@@ -10,4 +10,8 @@ public interface UserService {
     User getUser();
 
     void register(String username, String password) throws AlibabaTaobaoException;
+
+    User login(String username, String password) throws AlibabaTaobaoException;
+
+    void updateInformation(User user) throws AlibabaTaobaoException;
 }
