@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "order")
+@Table(name = "\"Order\"")
 public class Order {
 
     // 主键id
