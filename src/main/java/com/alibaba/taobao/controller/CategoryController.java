@@ -7,6 +7,7 @@ import com.alibaba.taobao.model.dao.User;
 import com.alibaba.taobao.model.request.AddCategoryReq;
 import com.alibaba.taobao.service.CategoryService;
 import com.alibaba.taobao.service.UserService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,6 +29,14 @@ public class CategoryController {
     @Autowired
     CategoryService categoryService;
 
+    /**
+     * 后台添加目录
+     *
+     * @param session
+     * @param addCategoryReq
+     * @return
+     */
+    @ApiOperation("后台添加目录")
     @PostMapping("admin/category/add")
     @ResponseBody
     public ApiRestResponse addCategory(HttpSession session, @Valid @RequestBody AddCategoryReq addCategoryReq) {
