@@ -1,5 +1,6 @@
 package com.alibaba.taobao.service;
 
+import com.alibaba.taobao.model.dao.Category;
 import com.alibaba.taobao.model.request.AddCategoryReq;
 
 /**
@@ -7,4 +8,6 @@ import com.alibaba.taobao.model.request.AddCategoryReq;
  */
 public interface CategoryService {
     void add(AddCategoryReq addCategoryReq);
+
+    void update(Category updateCategory);
 }

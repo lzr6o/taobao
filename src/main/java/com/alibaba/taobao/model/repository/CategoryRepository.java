@@ -16,4 +16,9 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
     @Transactional
     @Query(value = "insert into category (name, type, parent_id, order_num) VALUES (:#{#category.name}, :#{#category.type}, :#{#category.parentId}, :#{#category.orderNum})", nativeQuery = true)
     int insertSelective(@Param("category") Category category);
+
+    @Modifying
+    @Transactional
+    @Query("update Category c set c.name = :#{#category.name}, c.orderNum = :#{#category.orderNum}, c.parentId = :#{#category.parentId}, c.type =:#{#category.type} where c.id = :#{#category.id}")
+    int updateByPrimaryKeySelective(@Param("category") Category category);
 }

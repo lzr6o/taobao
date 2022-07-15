@@ -3,11 +3,14 @@ package com.alibaba.taobao.controller;
 import com.alibaba.taobao.common.ApiRestResponse;
 import com.alibaba.taobao.common.Constant;
 import com.alibaba.taobao.exception.AlibabaTaobaoExceptionEnum;
+import com.alibaba.taobao.model.dao.Category;
 import com.alibaba.taobao.model.dao.User;
 import com.alibaba.taobao.model.request.AddCategoryReq;
+import com.alibaba.taobao.model.request.UpdateCategoryReq;
 import com.alibaba.taobao.service.CategoryService;
 import com.alibaba.taobao.service.UserService;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,6 +52,27 @@ public class CategoryController {
         if (adminRole) {
             // 是管理员，执行操作
             categoryService.add(addCategoryReq);
+            return ApiRestResponse.success();
+        } else {
+            return ApiRestResponse.error(AlibabaTaobaoExceptionEnum.NEED_ADMIN);
+        }
+    }
+
+    @ApiOperation("后台更新目录")
+    @PostMapping("admin/category/update")
+    @ResponseBody
+    public ApiRestResponse updateCategory(HttpSession session, @Valid @RequestBody UpdateCategoryReq updateCategoryReq) {
+        User currentUser = (User) session.getAttribute(Constant.ALIBABA_TAOBAO_USER);
+        if (currentUser == null) {
+            return ApiRestResponse.error(AlibabaTaobaoExceptionEnum.NEED_LOGIN);
+        }
+        // 校验是否是管理员
+        boolean adminRole = userService.checkAdminRole(currentUser);
+        if (adminRole) {
+            // 是管理员，执行操作
+            Category category = new Category();
+            BeanUtils.copyProperties(updateCategoryReq, category);
+            categoryService.update(category);
             return ApiRestResponse.success();
         } else {
             return ApiRestResponse.error(AlibabaTaobaoExceptionEnum.NEED_ADMIN);

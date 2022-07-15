@@ -32,4 +32,18 @@ public class CategoryServiceImpl implements CategoryService {
             throw new AlibabaTaobaoException(AlibabaTaobaoExceptionEnum.CREATE_FAILED);
         }
     }
+
+    @Override
+    public void update(Category updateCategory) {
+        if (updateCategory.getName() != null) {
+            Category categoryOld = categoryRepository.findByName(updateCategory.getName());
+            if (categoryOld != null && categoryOld.getId() != updateCategory.getId()) {
+                throw new AlibabaTaobaoException(AlibabaTaobaoExceptionEnum.NAME_EXISTED);
+            }
+        }
+        int count = categoryRepository.updateByPrimaryKeySelective(updateCategory);
+        if (count == 0) {
+            throw new AlibabaTaobaoException(AlibabaTaobaoExceptionEnum.UPDATE_FAILED);
+        }
+    }
 }
