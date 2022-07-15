@@ -14,4 +14,6 @@ public interface UserService {
     User login(String username, String password) throws AlibabaTaobaoException;
 
     void updateInformation(User user) throws AlibabaTaobaoException;
+
+    boolean checkAdminRole(User user);
 }

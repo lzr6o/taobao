@@ -70,4 +70,10 @@ public class UserServiceImpl implements UserService {
             throw new AlibabaTaobaoException(AlibabaTaobaoExceptionEnum.UPDATE_FAILED);
         }
     }
+
+    @Override
+    public boolean checkAdminRole(User user) {
+        // 1是普通用户，2是管理员
+        return user.getRole() == 2;
+    }
 }

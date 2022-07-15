@@ -31,6 +31,14 @@ public class UserController {
         return userService.getUser();
     }
 
+    /**
+     * 注册
+     *
+     * @param username
+     * @param password
+     * @return
+     * @throws AlibabaTaobaoException
+     */
     @PostMapping("/register")
     @ResponseBody
     public ApiRestResponse register(@RequestParam("username") String username, @RequestParam("password") String password) throws AlibabaTaobaoException {
@@ -48,6 +56,15 @@ public class UserController {
         return ApiRestResponse.success();
     }
 
+    /**
+     * 登录
+     *
+     * @param username
+     * @param password
+     * @param session
+     * @return
+     * @throws AlibabaTaobaoException
+     */
     @PostMapping("/login")
     @ResponseBody
     public ApiRestResponse login(@RequestParam("username") String username, @RequestParam("password") String password, HttpSession session) throws AlibabaTaobaoException {
@@ -64,6 +81,14 @@ public class UserController {
         return ApiRestResponse.success(user);
     }
 
+    /**
+     * 更新个性签名
+     *
+     * @param session
+     * @param signature
+     * @return
+     * @throws AlibabaTaobaoException
+     */
     @PostMapping("/user/update")
     @ResponseBody
     public ApiRestResponse updateUserInfo(HttpSession session, @RequestParam String signature) throws AlibabaTaobaoException {
@@ -76,5 +101,49 @@ public class UserController {
         user.setPersonalizedSignature(signature);
         userService.updateInformation(user);
         return ApiRestResponse.success();
+    }
+
+    /**
+     * 登出，清除session
+     *
+     * @param session
+     * @return
+     */
+    @PostMapping("/user/logout")
+    @ResponseBody
+    public ApiRestResponse logout(HttpSession session) {
+        session.removeAttribute(Constant.ALIBABA_TAOBAO_USER);
+        return ApiRestResponse.success();
+    }
+
+    /**
+     * 管理员登录接口
+     *
+     * @param username
+     * @param password
+     * @param session
+     * @return
+     * @throws AlibabaTaobaoException
+     */
+    @PostMapping("/adminLogin")
+    @ResponseBody
+    public ApiRestResponse adminLogin(@RequestParam("username") String username, @RequestParam("password") String password, HttpSession session) throws AlibabaTaobaoException {
+        if (StringUtils.isEmpty(username)) {
+            return ApiRestResponse.error(AlibabaTaobaoExceptionEnum.NEED_USERNAME);
+        }
+        if (StringUtils.isEmpty(password)) {
+            return ApiRestResponse.error(AlibabaTaobaoExceptionEnum.NEED_PASSWORD);
+        }
+        User user = userService.login(username, password);
+        // 校验是否是管理员
+        if (userService.checkAdminRole(user)) {
+            // 是管理员，执行操作
+            // 保存用户信息时，不保存密码
+            user.setPassword(null);
+            session.setAttribute(Constant.ALIBABA_TAOBAO_USER, user);
+            return ApiRestResponse.success(user);
+        } else {
+            return ApiRestResponse.error(AlibabaTaobaoExceptionEnum.NEED_ADMIN);
+        }
     }
 }
