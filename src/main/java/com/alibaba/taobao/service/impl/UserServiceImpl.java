@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
         // 查询用户名是否存在，不允许重名
         User result = userRepository.findByUsername(username);
         if (result != null) {
-            throw new AlibabaTaobaoException(AlibabaTaobaoExceptionEnum.USERNAME_EXISTED);
+            throw new AlibabaTaobaoException(AlibabaTaobaoExceptionEnum.NAME_EXISTED);
         }
         // 写到数据库
         User user = new User();

@@ -1,6 +1,9 @@
 package com.alibaba.taobao.exception;
 
-public class AlibabaTaobaoException extends Exception {
+/**
+ * 描述: 统一异常
+ */
+public class AlibabaTaobaoException extends RuntimeException {
     private final Integer code;
     private final String message;
 
