@@ -7,6 +7,7 @@ import com.alibaba.taobao.model.dao.Category;
 import com.alibaba.taobao.model.dao.User;
 import com.alibaba.taobao.model.request.AddCategoryReq;
 import com.alibaba.taobao.model.request.UpdateCategoryReq;
+import com.alibaba.taobao.model.vo.CategoryVO;
 import com.alibaba.taobao.service.CategoryService;
 import com.alibaba.taobao.service.UserService;
 import com.github.pagehelper.PageInfo;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * 描述: 目录Controller
@@ -95,5 +97,13 @@ public class CategoryController {
     public ApiRestResponse listCategoryForAdmin(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
         PageInfo pageInfo = categoryService.listForAdmin(pageNum, pageSize);
         return ApiRestResponse.success(pageInfo);
+    }
+
+    @ApiOperation("前台目录列表")
+    @PostMapping("category/list")
+    @ResponseBody
+    public ApiRestResponse listCategoryForAdmin() {
+        List<CategoryVO> categoryVOS = categoryService.listForCustomer();
+        return ApiRestResponse.success(categoryVOS);
     }
 }

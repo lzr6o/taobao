@@ -5,13 +5,17 @@ import com.alibaba.taobao.exception.AlibabaTaobaoExceptionEnum;
 import com.alibaba.taobao.model.dao.Category;
 import com.alibaba.taobao.model.repository.CategoryRepository;
 import com.alibaba.taobao.model.request.AddCategoryReq;
+import com.alibaba.taobao.model.vo.CategoryVO;
 import com.alibaba.taobao.service.CategoryService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -72,5 +76,27 @@ public class CategoryServiceImpl implements CategoryService {
         List<Category> categoryList = categoryRepository.findAll();
         PageInfo pageInfo = new PageInfo(categoryList);
         return pageInfo;
+    }
+
+    @Override
+    @Cacheable(value = "listForCustomer")
+    public List<CategoryVO> listForCustomer() {
+        List<CategoryVO> categoryVOList = new ArrayList<>();
+        recursiveFindCategories(categoryVOList, 0);
+        return categoryVOList;
+    }
+
+    private void recursiveFindCategories(List<CategoryVO> categoryVOList, Integer parentId) {
+        // 递归获取所有子类别，并组合成为一个"目录树"
+        List<Category> categoryList = categoryRepository.findAllByParentId(parentId);
+        if (!CollectionUtils.isEmpty(categoryList)) {
+            for (int i = 0; i < categoryList.size(); i++) {
+                Category category = categoryList.get(i);
+                CategoryVO categoryVO = new CategoryVO();
+                BeanUtils.copyProperties(category, categoryVO);
+                categoryVOList.add(categoryVO);
+                recursiveFindCategories(categoryVO.getChildCategory(), categoryVO.getId());
+            }
+        }
     }
 }

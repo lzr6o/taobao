@@ -1,10 +1,11 @@
 package com.alibaba.taobao.model.vo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class CategoryVO {
+public class CategoryVO implements Serializable {
 
     // 主键
     private int id;

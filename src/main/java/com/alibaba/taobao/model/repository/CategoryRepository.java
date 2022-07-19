@@ -8,6 +8,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Integer> {
 
@@ -23,4 +25,5 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
     @Query("update Category c set c.name = :#{#category.name}, c.orderNum = :#{#category.orderNum}, c.parentId = :#{#category.parentId}, c.type =:#{#category.type} where c.id = :#{#category.id}")
     int updateByPrimaryKeySelective(@Param("category") Category category);
 
+    List<Category> findAllByParentId(Integer parentId);
 }
