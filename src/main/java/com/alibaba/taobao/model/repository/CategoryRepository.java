@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Integer> {
+
     Category findByName(String name);
 
     @Modifying(clearAutomatically = true)
@@ -21,4 +22,5 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
     @Transactional
     @Query("update Category c set c.name = :#{#category.name}, c.orderNum = :#{#category.orderNum}, c.parentId = :#{#category.parentId}, c.type =:#{#category.type} where c.id = :#{#category.id}")
     int updateByPrimaryKeySelective(@Param("category") Category category);
+
 }
