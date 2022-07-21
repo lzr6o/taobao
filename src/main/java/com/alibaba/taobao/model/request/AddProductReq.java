@@ -17,6 +17,10 @@ public class AddProductReq {
     // 商品详情
     private String detail;
 
+    // 商品分类
+    //@NotNull(message = "商品分类不能为null")
+    //private Integer categoryId;
+
     // 价格，单位-分
     @NotNull(message = "商品价格不能为null")
     @Min(value = 1, message = "价格不能小于1分")
@@ -54,6 +58,14 @@ public class AddProductReq {
         this.detail = detail;
     }
 
+    /*public Integer getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
+    }*/
+
     public int getPrice() {
         return price;
     }
@@ -74,4 +86,7 @@ public class AddProductReq {
         return status;
     }
 
+    public void setStatus(int status) {
+        this.status = status;
+    }
 }

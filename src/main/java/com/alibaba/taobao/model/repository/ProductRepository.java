@@ -14,6 +14,6 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     @Modifying(clearAutomatically = true)
     @Transactional
-    @Query(value = "insert into product (name, image, detail, price, stock) VALUES (:#{#product.name}, :#{#product.image}, :#{#product.detail}, :#{#product.price}), :#{#product.stock})", nativeQuery = true)
+    @Query(value = "insert into product (category_id, name, image, detail, price, stock, status) VALUES (:#{#product.category.id}, :#{#product.name}, :#{#product.image}, :#{#product.detail}, :#{#product.price}), :#{#product.stock}, :#{#product.status})", nativeQuery = true)
     int insertSelective(@Param("product") Product product);
 }

@@ -78,8 +78,7 @@ public class Product {
 
     }
 
-    public Product(int id, Category category, Cart cart, String name, String image, String detail, int price, int stock, int status, Date createTime, Date updateTime) {
-        this.id = id;
+    public Product(Category category, Cart cart, String name, String image, String detail, int price, int stock, int status, Date createTime, Date updateTime) {
         this.category = category;
         this.cart = cart;
         this.name = name;
